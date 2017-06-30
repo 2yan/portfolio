@@ -1,9 +1,6 @@
 from ryan_tools import * 
 import pickle
-from git import Repo
-
-    
-
+   
 
 current_val = 0
 def get_current_value():
@@ -15,11 +12,11 @@ def change_current_value(change, dollar_amount_update = False):
     current_val = current_val + change
     if dollar_amount_update:
         update_dollars()
+        
 def update_dollars():
     'updates dollar values based on percentages Current Val is King'
     current = get_current_value()
     portfolio['last value'] = portfolio['percentage'] * current
-
 
 def update_percentages(name):
     'updates percentage values based on dollar amount, used during deposit or withdrawal ONLY'
@@ -27,14 +24,12 @@ def update_percentages(name):
     for index in portfolio.index:
         usd = portfolio.loc[index, 'last value']
         portfolio.loc[index, 'percentage'] = usd/current
-    
 
 def add_account(iden):
     if iden in portfolio.index:
         raise Exception(' ID already taken. Choose new id' )
     portfolio.loc[iden, 'percentage'] = 0
     portfolio.loc[iden, 'last value'] = 0
-
 
 def deposit(name, usd):
     global portfolio   
@@ -49,9 +44,6 @@ def deposit(name, usd):
     update_dollars()
   
 
-        
-    
-    
 def withdraw(name, usd):
     usd = -1 * abs(usd)
     update_dollars()
@@ -61,7 +53,6 @@ def withdraw(name, usd):
     deposit(name, usd )
     
 
-
 def __init__():
     global portfolio
     global current_val
@@ -69,7 +60,6 @@ def __init__():
     current_val = 0
 
     
-
 def save():
     global portfolio
     global current_val
